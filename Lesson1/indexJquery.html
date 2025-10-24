@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <p id="count"></p>
+        <button id="btn">Update Count</button>
+    </div>
+    <ul id="taskList">
+        <li>Buy milk</li>
+    </ul>
+
+    <input id="newTask" type="text" />
+    <button id="addTask">Add Task</button>
+
+    <script>
+        $('#addTask').click(function () {
+            const task = $('#newTask').val();
+
+            // Manually add element to DOM
+            $('#taskList').append(`<li>${task}</li>`);
+
+            // If you re-render something larger, you might refresh or reload the whole page
+            // location.reload(); // often used in jQuery projects to "refresh" state
+        });
+    </script>
+
+    <script>
+        $('#count').text(0);
+        $('#btn').click(function () {
+            let count = parseInt($('#count').text());
+            $('#count').text(count + 1);
+        })
+    </script>
+</body>
+
+</html>
