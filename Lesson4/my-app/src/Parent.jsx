@@ -17,9 +17,13 @@ function Daughter(props) {
 }
 
 function Parent() {
+  const shoot = (a) => {
+    alert(a);
+  };
   return (
     <div>
       <h1>My Two Children</h1>
+      <button onClick={() => shoot('YYYOoooo!')}>Take the shoot!</button>
       <Son
         statement=" This was writtern in Parent Component, but displayed as a part of the
           SOn component"
