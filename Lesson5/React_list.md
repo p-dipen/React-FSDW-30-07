@@ -1,7 +1,7 @@
 # React Lists
 The JavaScript `map()` array method is generally the preferred method.
 
-```
+```jsx
 function MyCars() {
   const cars = ['Ford', 'BMW', 'Audi'];
   return (
