@@ -49,3 +49,51 @@ Let’s quickly recap what’s going on and the order in which the methods are c
 5. If the `Clock` component is ever removed from the DOM, React calls the `componentWillUnmount()` lifecycle method so the timer is stopped.
    
 ![React Licycle](https://cdn-media-1.freecodecamp.org/images/1*_drMYY_IEgboMS4RhvC-lQ.png)
+
+## Using the state correctly
+
+There are three things you should know about setState().
+
+### Do not modify state directly
+for example, this will not re-render a component
+```javascript 
+// Wrong
+this.state.comment = "Hello";
+```
+
+Instead, use setState():
+```javascript
+//Correct
+this.setState({ comment : 'Hello' });
+```
+
+The only place where you can assign `the.state` is the constructor.
+
+### State Updates May be asynchronous
+React may batch multiple `setState()` calls into a single update for performance.
+
+Because `this.props` and `this.state` may be updated asynchronously, you should not rely on their values for calculating the next state.
+
+For example, this code may fail to update the counter:
+```javascript
+// Wrong
+this.setState({
+    counter: this.state.counter + this.props.increment,
+})
+```
+
+To fix it, use a second form of `setState()` that accepts a function rather than an object. That function will receive the previous state as the first argument, and the props at the time the update is applied as the second argument:
+```javascript
+// Correct 
+this.setState((state,props) => ({
+    counter: state.counter + props.increment
+}))
+```
+We used an arrow function above, but it also works with regular functions:
+```javascript
+// Correct 
+this.setState(function (state,props) {
+   return { counter: state.counter + props.increment };
+});
+```
+
