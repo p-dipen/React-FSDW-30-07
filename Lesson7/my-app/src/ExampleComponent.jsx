@@ -4,6 +4,7 @@ import { TitleContext } from './App';
 function ApiFetchComponent() {
   const [title, setTitle] = useContext(TitleContext);
   const [count, setCount] = useState(1);
+  const [isDisplay, setIsDisplay] = useState(false);
 
   useEffect(() => {
     fetchApi();
