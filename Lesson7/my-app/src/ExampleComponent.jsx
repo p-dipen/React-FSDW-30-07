@@ -1,32 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import TimerComponent from './TimerComponent';
-function ExampleComponent() {
-  const [data, setData] = useState(null);
-  const [count, setCount] = useState(0);
-  const [isDisplay, setIsDisplay] = useState(true);
+import { TitleContext } from './App';
+function ApiFetchComponent() {
+  const [title, setTitle] = useContext(TitleContext);
+  const [count, setCount] = useState(1);
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/posts/1')
+    fetchApi();
+  }, [count]);
+  const fetchApi = () => {
+    fetch(`https://jsonplaceholder.typicode.com/posts/${count}`)
       .then((response) => response.json())
       .then((json) => {
-        setData(json);
-        setCount((prevVal) => prevVal + 1);
+        setTitle(json.title);
       });
-  }, []);
-
+  };
   return (
-    <div>
-      {data ? data.title : 'Loading...'}
+    <div style={{ border: '1px solid green' }}>
+      {title ? title : 'Loading...'}
       <br />
       ApiCalledCount {count}
       <h3>
-        <button onClick={() => setIsDisplay(!isDisplay)}>
-          {isDisplay ? 'Hide Timer' : 'Show Timer'}
-        </button>
-        {isDisplay && <TimerComponent />}
+        <button onClick={() => setCount(count + 1)}>Call API Again</button>
       </h3>
     </div>
   );
 }
 
-export default ExampleComponent;
+export default ApiFetchComponent;
